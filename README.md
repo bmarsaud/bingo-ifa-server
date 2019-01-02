@@ -1,6 +1,7 @@
-#bingo-ifa-server
+# bingo-ifa-server
+*Work In Progress*
 
-RESTful server of a Bingo game for INSA students.
+RESTful server of a Bingo game for IFA INSA students.
 
 ## Run server
 Running server : `mvn exec:java`
@@ -8,8 +9,6 @@ Running server : `mvn exec:java`
 Running tests : `mvn clean test`
 
 ## Entry points
-*Work In Progress*
-
 * `grid`
     * `grid/{gridId}` : get grid by id
     * `grid/shuffle/{gridId}` : shuffle one box of the grid
