@@ -1,8 +1,30 @@
-java:
+stages:
+  - build
+  - test
+  - post-test
+
+build:
+  stage: build
+  script:
+    - mvn compile
+
+unit-test:
   stage: test
   script:
-  - mvn verify
+    - mvn test
   artifacts:
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
+
+coverage:
+  stage: post-test
+  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+)%/'
+  script:
+    - mvn jacoco:report
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
+
+dependencies:
+  stage: post-test
+  script:
+    - mvn updateimpact:submit

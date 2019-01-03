@@ -3,6 +3,11 @@
 
 RESTful server of a Bingo game for IFA INSA students.
 
+![Pipeline status](http://git.mouseover.fr/bmarsaud/bingo-ifa-server/badges/master/build.svg)
+![Code coverage](http://git.mouseover.fr/bmarsaud/bingo-ifa-server/badges/master/coverage.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/90e743573944222a4323/maintainability)](https://codeclimate.com/github/TheZopo/bingo-ifa-server/maintainability)
+[![Dependencies](https://app.updateimpact.com/badge/1080871293970157568/bingo-ifa-server.svg?config=test)](https://app.updateimpact.com/latest/1080871293970157568/bingo-ifa-server)
+
 ## Run server
 Running server : `mvn exec:java`
 
@@ -30,6 +35,7 @@ Running tests : `mvn clean test`
 * [MariaDB Connector/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/) - MariaDB JDBC connector
 * [jersey-hmac-auth](https://github.com/bazaarvoice/jersey-hmac-auth) - HMAC auth implementation for Jersey
 * [JUnit](https://junit.org/junit5/) - Test framework for java
+* [Jacoco](https://www.jacoco.org/jacoco/) - Code coverage library for Java
 
 ## Contributors
 
