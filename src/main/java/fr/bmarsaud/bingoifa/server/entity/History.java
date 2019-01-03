@@ -1,4 +1,4 @@
-package fr.bmarsaud.entity;
+package fr.bmarsaud.bingoifa.server.entity;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,11 @@ public class History {
     public History(User user, ArrayList<HistoryLine> history) {
         this.user = user;
         this.history = history;
+    }
+
+    public History() {
+        user = null;
+        history = null;
     }
 
     public User getUser() {

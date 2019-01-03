@@ -1,4 +1,4 @@
-package fr.bmarsaud.entity;
+package fr.bmarsaud.bingoifa.server.entity;
 
 public class Sentence {
     private int id;
@@ -13,6 +13,14 @@ public class Sentence {
         this.upVotes = upVotes;
         this.downVotes = downVotes;
         this.activated = activated;
+    }
+
+    public Sentence() {
+        this.id = -1;
+        this.label = null;
+        this.upVotes = -1;
+        this.downVotes = -1;
+        this.activated = false;
     }
 
     public int getId() {

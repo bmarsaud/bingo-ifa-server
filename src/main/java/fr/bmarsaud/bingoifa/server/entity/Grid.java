@@ -1,4 +1,4 @@
-package fr.bmarsaud.entity;
+package fr.bmarsaud.bingoifa.server.entity;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,6 +14,13 @@ public class Grid {
         this.date = date;
         this.shuffled = shuffled;
         this.boxes = boxes;
+    }
+
+    public Grid() {
+        id = -1;
+        date = null;
+        shuffled = false;
+        boxes = null;
     }
 
     public int getId() {

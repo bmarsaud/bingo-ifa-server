@@ -1,4 +1,4 @@
-package fr.bmarsaud.entity;
+package fr.bmarsaud.bingoifa.server.entity;
 
 import java.sql.Date;
 
@@ -13,6 +13,13 @@ public class HistoryLine {
         this.date = date;
         this.grid = grid;
         this.rank = rank;
+    }
+
+    public HistoryLine() {
+        id = -1;
+        date = null;
+        grid = null;
+        rank = -1;
     }
 
     public int getId() {

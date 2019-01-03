@@ -1,15 +1,14 @@
-package fr.bmarsaud.model;
+package fr.bmarsaud.bingoifa.server.model;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import fr.bmarsaud.Main;
+import fr.bmarsaud.bingoifa.server.BingoIFAServer;
 
 public class ConnectionFactory {
     private static HikariDataSource dataSource;
@@ -21,7 +20,7 @@ public class ConnectionFactory {
         Properties properties = new Properties();
 
         try {
-            properties.load(Main.class.getResourceAsStream("/database.properties"));
+            properties.load(BingoIFAServer.class.getResourceAsStream("/database.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

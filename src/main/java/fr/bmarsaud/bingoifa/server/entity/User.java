@@ -1,4 +1,4 @@
-package fr.bmarsaud.entity;
+package fr.bmarsaud.bingoifa.server.entity;
 
 public class User {
     private int id;
@@ -11,6 +11,13 @@ public class User {
         this.login = login;
         this.password = password;
         this.grid = grid;
+    }
+
+    public User() {
+        id = -1;
+        login = null;
+        password = null;
+        grid = null;
     }
 
     public int getId() {

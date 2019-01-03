@@ -1,4 +1,4 @@
-package fr.bmarsaud.resource;
+package fr.bmarsaud.bingoifa.server.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

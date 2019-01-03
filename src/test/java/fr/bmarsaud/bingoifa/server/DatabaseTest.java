@@ -1,10 +1,10 @@
-package fr.bmarsaud;
+package fr.bmarsaud.bingoifa.server;
 
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-import fr.bmarsaud.model.ConnectionFactory;
+import fr.bmarsaud.bingoifa.server.model.ConnectionFactory;
 
 public class DatabaseTest {
 

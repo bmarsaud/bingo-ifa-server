@@ -26,6 +26,9 @@ Running tests : `mvn clean test`
 ## Dependencies
 * [Jersey](https://jersey.github.io/) - Framework for developing RESTful web services with JAX-RS support
 * [Grizzly2](https://javaee.github.io/grizzly/) - Highly scalable web server for J2EE applications
+* [HikariCP](https://brettwooldridge.github.io/HikariCP/) - JDBC connection pool
+* [MariaDB Connector/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/) - MariaDB JDBC connector
+* [jersey-hmac-auth](https://github.com/bazaarvoice/jersey-hmac-auth) - HMAC auth implementation for Jersey
 * [JUnit](https://junit.org/junit5/) - Test framework for java
 
 ## Contributors

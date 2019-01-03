@@ -46,6 +46,12 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>2.3.0</version>
         </dependency>
+        <!-- HMAC authentication -->
+        <dependency>
+            <groupId>com.bazaarvoice.auth</groupId>
+            <artifactId>jersey-hmac-auth-server2</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- Unit tests -->
         <dependency>
             <groupId>junit</groupId>
@@ -79,7 +85,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>fr.bmarsaud.Main</mainClass>
+                    <mainClass>fr.bmarsaud.bingoifa.server.BingoIFAServer</mainClass>
                 </configuration>
             </plugin>
         </plugins>

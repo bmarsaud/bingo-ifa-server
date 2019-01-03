@@ -1,11 +1,11 @@
-package fr.bmarsaud.resource;
+package fr.bmarsaud.bingoifa.server.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import fr.bmarsaud.entity.Grid;
+import fr.bmarsaud.bingoifa.server.entity.Grid;
 
 @Path("grid")
 public class GridResource {

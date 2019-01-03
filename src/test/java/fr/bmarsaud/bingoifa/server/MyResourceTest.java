@@ -1,4 +1,4 @@
-package fr.bmarsaud;
+package fr.bmarsaud.bingoifa.server;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -9,6 +9,9 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import fr.bmarsaud.bingoifa.server.BingoIFAServer;
+
 import static org.junit.Assert.assertEquals;
 
 public class MyResourceTest {
@@ -19,17 +22,17 @@ public class MyResourceTest {
     @Before
     public void setUp() throws Exception {
         // start the server
-        server = Main.startServer();
+        server = BingoIFAServer.startServer();
         // create the client
         Client c = ClientBuilder.newClient();
 
         // uncomment the following line if you want to enable
         // support for JSON in the client (you also have to uncomment
-        // dependency on jersey-media-json module in pom.xml and Main.startServer())
+        // dependency on jersey-media-json module in pom.xml and BingoIFAServer.startServer())
         // --
         // c.configuration().enable(new org.glassfish.jersey.media.json.JsonJaxbFeature());
 
-        target = c.target(Main.BASE_URI);
+        target = c.target(BingoIFAServer.BASE_URI);
     }
 
     @After

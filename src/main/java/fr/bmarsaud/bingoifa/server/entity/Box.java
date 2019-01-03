@@ -1,4 +1,4 @@
-package fr.bmarsaud.entity;
+package fr.bmarsaud.bingoifa.server.entity;
 
 import java.sql.Time;
 
@@ -15,6 +15,14 @@ public class Box {
         this.position = position;
         this.checked = checked;
         this.checkedTime = checkedTime;
+    }
+
+    public Box() {
+        id = -1;
+        sentence = null;
+        position = -1;
+        checked = false;
+        checkedTime = null;
     }
 
     public int getId() {
