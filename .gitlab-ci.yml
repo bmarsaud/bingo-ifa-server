@@ -29,7 +29,7 @@ coverage:
   stage: post-test
   coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+)%/'
   script:
-    - mvn jacoco:report
+    - mvn test jacoco:report
     - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
 
 dependencies:
