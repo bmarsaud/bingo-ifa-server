@@ -10,6 +10,13 @@ build:
 
 unit-test:
   stage: test
+  services:
+    - name: registry.mouseover.fr:5000/bm/bingo-ifa/test-data
+      alias: test-data
+  variables:
+    MYSQL_USER: "bingo-ifa"
+    MYSQL_PASSWORD: "bingo-ifa"
+    MYSQL_RANDOM_ROOT_PASSWORD: "yes"
   script:
     - mvn test
   artifacts:
