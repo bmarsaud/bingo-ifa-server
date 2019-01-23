@@ -10,6 +10,7 @@ build:
 
 unit-test:
   stage: test
+  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+)%/'
   services:
     - name: registry.mouseover.fr:5000/bm/bingo-ifa/test-data
       alias: test-data
@@ -20,17 +21,12 @@ unit-test:
     MYSQL_RANDOM_ROOT_PASSWORD: "yes"
   script:
     - mvn test
+    - mvn jacoco:report
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
   artifacts:
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
-
-coverage:
-  stage: post-test
-  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+)%/'
-  script:
-    - mvn test jacoco:report
-    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
 
 dependencies:
   stage: post-test
