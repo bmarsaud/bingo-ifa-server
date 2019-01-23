@@ -3,7 +3,7 @@
 
 RESTful server of a Bingo game for IFA INSA students.
 
-![Pipeline status](http://git.mouseover.fr/bmarsaud/bingo-ifa-server/badges/master/build.svg)
+[![Pipeline status](http://git.mouseover.fr/bmarsaud/bingo-ifa-server/badges/master/build.svg)](https://git.mouseover.fr/bmarsaud/bingo-ifa-server/pipelines)
 ![Code coverage](http://git.mouseover.fr/bmarsaud/bingo-ifa-server/badges/master/coverage.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/90e743573944222a4323/maintainability)](https://codeclimate.com/github/TheZopo/bingo-ifa-server/maintainability)
 [![Dependencies](https://app.updateimpact.com/badge/1080871293970157568/bingo-ifa-server.svg?config=test)](https://app.updateimpact.com/latest/1080871293970157568/bingo-ifa-server)

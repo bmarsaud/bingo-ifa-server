@@ -14,6 +14,7 @@ unit-test:
     - name: registry.mouseover.fr:5000/bm/bingo-ifa/test-data
       alias: test-data
   variables:
+    MYSQL_DATABASE: "bingo-ifa"
     MYSQL_USER: "bingo-ifa"
     MYSQL_PASSWORD: "bingo-ifa"
     MYSQL_RANDOM_ROOT_PASSWORD: "yes"
