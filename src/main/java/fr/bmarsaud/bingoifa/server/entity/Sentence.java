@@ -62,4 +62,13 @@ public class Sentence {
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
+
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!(obj instanceof Sentence)) return false;
+        if(obj == this) return true;
+
+        Sentence sentence = (Sentence) obj;
+        return sentence.getId() == id && sentence.getLabel().equals(label) && sentence.getDownVotes() == downVotes && sentence.getUpVotes() == upVotes && sentence.isActivated() == activated;
+    }
 }

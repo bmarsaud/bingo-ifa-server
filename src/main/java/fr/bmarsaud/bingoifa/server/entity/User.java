@@ -51,4 +51,17 @@ public class User {
     public void setGrid(Grid grid) {
         this.grid = grid;
     }
+
+    public String toString() {
+        return "User{id=" + id + ", login=" + login + ", password=" + password + ", grid=" + grid + ", grid=" + grid + "}";
+    }
+
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!(obj instanceof User)) return false;
+        if(obj == this) return true;
+
+        User user = (User) obj;
+        return user.getId() == id && user.getLogin().equals(login) && user.getPassword().equals(password);
+    }
 }

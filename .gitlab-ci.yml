@@ -10,7 +10,7 @@ build:
 
 unit-test:
   stage: test
-  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+)%/'
+  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+).%/'
   services:
     - name: registry.mouseover.fr:5000/bm/bingo-ifa/test-data
       alias: test-data
@@ -22,7 +22,7 @@ unit-test:
   script:
     - mvn test
     - mvn jacoco:report
-    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | grep -o '[^>]*%' | sed -e 's/^/Jacoco-Test-Coverage:/'
   artifacts:
     reports:
       junit:

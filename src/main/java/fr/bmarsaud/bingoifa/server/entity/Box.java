@@ -64,4 +64,13 @@ public class Box {
     public void setCheckedTime(Time checkedTime) {
         this.checkedTime = checkedTime;
     }
+
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!(obj instanceof Box)) return false;
+        if(obj == this) return true;
+
+        Box box = (Box) obj;
+        return box.getId() == id && box.getSentence().equals(sentence) && box.getPosition() == position && box.isChecked() == checked && (box.getCheckedTime() == null && checkedTime == null || box.getCheckedTime().equals(checkedTime));
+    }
 }

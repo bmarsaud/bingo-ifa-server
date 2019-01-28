@@ -54,4 +54,13 @@ public class Grid {
     public void setBoxes(ArrayList<Box> boxes) {
         this.boxes = boxes;
     }
+
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!(obj instanceof Grid)) return false;
+        if(obj == this) return true;
+
+        Grid grid = (Grid) obj;
+        return grid.getId() == id && grid.getDate().equals(date) && grid.getBoxes().equals(boxes);
+    }
 }
