@@ -7,11 +7,27 @@ import java.sql.SQLException;
 
 import fr.bmarsaud.bingoifa.server.entity.User;
 
-public class UserDAO {
+public class UserDAO implements DAO<User> {
     private GridDAO gridDAO;
 
     public UserDAO() {
         gridDAO = new GridDAO();
+    }
+
+    public boolean create(User obj) {
+        return false;
+    }
+
+    public boolean update(User obj) {
+        return false;
+    }
+
+    public boolean delete(User obj) {
+        return false;
+    }
+
+    public User find(int id) {
+        return null;
     }
 
     public User findFromName(String name) {
@@ -26,10 +42,10 @@ public class UserDAO {
             ResultSet result = statement.executeQuery();
             if(result.next()) {
                 user = new User(
-                    result.getInt("idUser"),
-                    result.getString("login"),
-                    result.getString("password"),
-                    gridDAO.find(result.getInt("currentIdGrid"))
+                        result.getInt("idUser"),
+                        result.getString("login"),
+                        result.getString("password"),
+                        gridDAO.find(result.getInt("currentIdGrid"))
                 );
             }
 

@@ -10,7 +10,7 @@ build:
 
 unit-test:
   stage: test
-  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+).%/'
+  coverage: '/Jacoco-Test-Coverage:(\d+\.?\d+).?%/'
   services:
     - name: registry.mouseover.fr:5000/bm/bingo-ifa/test-data
       alias: test-data

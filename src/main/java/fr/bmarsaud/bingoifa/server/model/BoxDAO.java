@@ -8,11 +8,27 @@ import java.util.ArrayList;
 
 import fr.bmarsaud.bingoifa.server.entity.Box;
 
-public class BoxDAO {
+public class BoxDAO implements DAO<Box> {
     private SentenceDAO sentenceDAO;
 
     public BoxDAO() {
         sentenceDAO = new SentenceDAO();
+    }
+
+    public boolean create(Box obj) {
+        return false;
+    }
+
+    public boolean update(Box obj) {
+        return false;
+    }
+
+    public boolean delete(Box obj) {
+        return false;
+    }
+
+    public Box find(int id) {
+        return null;
     }
 
     public ArrayList<Box> getGridBoxes(int gridId) {
@@ -26,11 +42,11 @@ public class BoxDAO {
             ResultSet result = statement.executeQuery();
             while(result.next()) {
                 boxes.add(new Box(
-                    result.getInt("idBox"),
-                    sentenceDAO.find(result.getInt("idSentence")),
-                    result.getInt("position"),
-                    result.getBoolean("checked"),
-                    result.getTime("checkTime")
+                        result.getInt("idBox"),
+                        sentenceDAO.find(result.getInt("idSentence")),
+                        result.getInt("position"),
+                        result.getBoolean("checked"),
+                        result.getTime("checkTime")
                 ));
             }
         } catch (SQLException e) {

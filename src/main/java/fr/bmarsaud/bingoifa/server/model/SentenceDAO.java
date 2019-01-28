@@ -8,11 +8,23 @@ import java.util.HashMap;
 
 import fr.bmarsaud.bingoifa.server.entity.Sentence;
 
-public class SentenceDAO {
+public class SentenceDAO implements DAO<Sentence>{
     private static HashMap<Integer, Sentence> sentences;
 
     public SentenceDAO() {
         sentences = new HashMap<>();
+    }
+
+    public boolean create(Sentence obj) {
+        return false;
+    }
+
+    public boolean update(Sentence obj) {
+        return false;
+    }
+
+    public boolean delete(Sentence obj) {
+        return false;
     }
 
     public Sentence find(int sentenceId) {
