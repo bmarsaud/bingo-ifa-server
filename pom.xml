@@ -100,9 +100,16 @@
                             <goal>java</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>setup-local-tests</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                 </executions>
                 <configuration>
                     <mainClass>fr.bmarsaud.bingoifa.server.BingoIFAServer</mainClass>
+                    <executable>setup-local-tests.sh</executable>
                 </configuration>
             </plugin>
         </plugins>

@@ -4,9 +4,9 @@ public interface DAO<T> {
     /**
      * Create an obj in the database
      * @param obj the object to insert
-     * @return true if the object is successfully inserted, false instead
+     * @return the created object updated with his id
      */
-    boolean create(T obj);
+    T create(T obj);
 
     /**
      * Update an obj in the database

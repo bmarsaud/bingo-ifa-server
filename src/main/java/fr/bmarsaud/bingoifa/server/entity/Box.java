@@ -17,6 +17,14 @@ public class Box {
         this.checkedTime = checkedTime;
     }
 
+    public Box(Sentence sentence, int position, boolean checked, Time checkedTime) {
+        this.id = -1;
+        this.sentence = sentence;
+        this.position = position;
+        this.checked = checked;
+        this.checkedTime = checkedTime;
+    }
+
     public Box() {
         id = -1;
         sentence = null;
@@ -72,5 +80,9 @@ public class Box {
 
         Box box = (Box) obj;
         return box.getId() == id && box.getSentence().equals(sentence) && box.getPosition() == position && box.isChecked() == checked && (box.getCheckedTime() == null && checkedTime == null || box.getCheckedTime().equals(checkedTime));
+    }
+
+    public String toString() {
+        return "Box{id=" + id + ", position=" + position + ", checked=" + checked + ", checkedTime=" + checkedTime + " idSentence=" + sentence.getId() + "}";
     }
 }

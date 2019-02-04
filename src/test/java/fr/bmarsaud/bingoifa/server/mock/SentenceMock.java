@@ -25,4 +25,7 @@ public class SentenceMock {
         new Sentence(16, "Un “BEEP” de Linux", 0, 0, true),
         new Sentence(17, "Maxime parle de BFV", 0, 0, true)
     );
+
+    public static Sentence dummySentence = new Sentence("Dummy text", 1, 1, false);
+    public static Sentence nonexistentSentence = new Sentence(-1, "Sentence does not exists", 0, 0, false);
 }

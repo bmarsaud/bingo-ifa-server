@@ -1,6 +1,7 @@
 package fr.bmarsaud.bingoifa.server.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Grid {
@@ -16,11 +17,18 @@ public class Grid {
         this.boxes = boxes;
     }
 
+    public Grid(Date date, boolean shuffled, ArrayList<Box> boxes) {
+        this.id = -1;
+        this.date = date;
+        this.shuffled = shuffled;
+        this.boxes = boxes;
+    }
+
     public Grid() {
         id = -1;
-        date = null;
+        date = Date.valueOf(LocalDate.now());
         shuffled = false;
-        boxes = null;
+        boxes = new ArrayList<>();
     }
 
     public int getId() {
@@ -62,5 +70,9 @@ public class Grid {
 
         Grid grid = (Grid) obj;
         return grid.getId() == id && grid.getDate().equals(date) && grid.getBoxes().equals(boxes);
+    }
+
+    public String toString() {
+        return "Grid{id=" + id + ", date=" + date + ", suffled=" + shuffled + ", boxes=" + boxes + "}";
     }
 }

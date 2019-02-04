@@ -1,16 +1,29 @@
 package fr.bmarsaud.bingoifa.server.entity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class User {
     private int id;
     private String login;
     private String password;
     private Grid grid;
+    private ArrayList<HistoryLine> history;
 
-    public User(int id, String login, String password, Grid grid) {
+    public User(int id, String login, String password, Grid grid, ArrayList<HistoryLine> history) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.grid = grid;
+        this.history = history;
+    }
+
+    public User(String login, String password, Grid grid, ArrayList<HistoryLine> history) {
+        this.id = -1;
+        this.login = login;
+        this.password = password;
+        this.grid = grid;
+        this.history = history;
     }
 
     public User() {
@@ -18,6 +31,7 @@ public class User {
         login = null;
         password = null;
         grid = null;
+        history = new ArrayList<>();
     }
 
     public int getId() {
@@ -52,8 +66,16 @@ public class User {
         this.grid = grid;
     }
 
+    public ArrayList<HistoryLine> getHistory() {
+        return history;
+    }
+
+    public void setHistory(ArrayList<HistoryLine> history) {
+        this.history = history;
+    }
+
     public String toString() {
-        return "User{id=" + id + ", login=" + login + ", password=" + password + ", grid=" + grid + ", grid=" + grid + "}";
+        return "User{id=" + id + ", login=" + login + ", password=" + password + ", grid=" + grid + ", history=" + history + "}";
     }
 
     public boolean equals(Object obj) {
@@ -62,6 +84,6 @@ public class User {
         if(obj == this) return true;
 
         User user = (User) obj;
-        return user.getId() == id && user.getLogin().equals(login) && user.getPassword().equals(password);
+        return user.getId() == id && user.getLogin().equals(login) && user.getPassword().equals(password) && (user.getGrid() == null && grid == null || user.getGrid().equals(grid)) && user.getHistory().equals(history);
     }
 }

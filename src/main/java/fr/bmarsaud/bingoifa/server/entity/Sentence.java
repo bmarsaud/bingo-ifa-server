@@ -15,6 +15,14 @@ public class Sentence {
         this.activated = activated;
     }
 
+    public Sentence(String label, int upVotes, int downVotes, boolean activated) {
+        this.id = -1;
+        this.label = label;
+        this.upVotes = upVotes;
+        this.downVotes = downVotes;
+        this.activated = activated;
+    }
+
     public Sentence() {
         this.id = -1;
         this.label = null;
@@ -70,5 +78,9 @@ public class Sentence {
 
         Sentence sentence = (Sentence) obj;
         return sentence.getId() == id && sentence.getLabel().equals(label) && sentence.getDownVotes() == downVotes && sentence.getUpVotes() == upVotes && sentence.isActivated() == activated;
+    }
+
+    public String toString() {
+        return "Sentence{id=" + id + ", label=\"" + label + "\", downVotes=" + downVotes + ", upVotes=" + upVotes + ", activated=" + activated + "}";
     }
 }
