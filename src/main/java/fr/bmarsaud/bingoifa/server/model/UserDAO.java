@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 import fr.bmarsaud.bingoifa.server.entity.User;
 
@@ -24,10 +25,12 @@ public class UserDAO implements DAO<User> {
 
         try {
             connection = ConnectionFactory.getConnection();
-            statement = connection.prepareStatement("INSERT INTO User(login, password, currentIdGrid) VALUES (?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            statement = connection.prepareStatement("INSERT INTO User(login, password, currentIdGrid, lastRequest) VALUES (?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
-            statement.setInt(3, user.getGrid().getId());
+            if(user.getGrid() != null) statement.setInt(3, user.getGrid().getId());
+            else statement.setNull(3, Types.INTEGER);
+            statement.setTimestamp(4, user.getLastRequest());
             statement.executeUpdate();
 
             result = statement.getGeneratedKeys();
@@ -57,11 +60,13 @@ public class UserDAO implements DAO<User> {
 
         try {
             connection = ConnectionFactory.getConnection();
-            statement = connection.prepareStatement("UPDATE User SET login = ?, password = ?, currentIdGrid = ? WHERE idUser = ?;");
+            statement = connection.prepareStatement("UPDATE User SET login = ?, password = ?, currentIdGrid = ?, lastRequest = ? WHERE idUser = ?;");
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
-            statement.setInt(3, user.getGrid() != null ? user.getGrid().getId() : -1);
-            statement.setInt(4, user.getId());
+            if(user.getGrid() != null) statement.setInt(3, user.getGrid().getId());
+            else statement.setNull(3, Types.INTEGER);
+            statement.setTimestamp(4, user.getLastRequest());
+            statement.setInt(5, user.getId());
 
             if(statement.executeUpdate() > 0) {
                 return true;
@@ -125,6 +130,7 @@ public class UserDAO implements DAO<User> {
                         result.getString("login"),
                         result.getString("password"),
                         gridDAO.find(result.getInt("currentIdGrid")),
+                        result.getTimestamp("lastRequest"),
                         historyLineDAO.getHistoryFromUserId(result.getInt("idUser"))
                 );
             }
@@ -161,6 +167,7 @@ public class UserDAO implements DAO<User> {
                         result.getString("login"),
                         result.getString("password"),
                         gridDAO.find(result.getInt("currentIdGrid")),
+                        result.getTimestamp("lastRequest"),
                         historyLineDAO.getHistoryFromUserId(result.getInt("idUser"))
                 );
             }

@@ -69,7 +69,7 @@ public class Grid {
         if(obj == this) return true;
 
         Grid grid = (Grid) obj;
-        return grid.getId() == id && grid.getDate().equals(date) && grid.getBoxes().equals(boxes);
+        return grid.getId() == id && grid.getDate().equals(date) && grid.isShuffled() == shuffled && grid.getBoxes().equals(boxes);
     }
 
     public String toString() {

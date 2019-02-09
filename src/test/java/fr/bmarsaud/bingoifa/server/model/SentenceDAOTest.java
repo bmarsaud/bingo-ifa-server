@@ -42,7 +42,9 @@ public class SentenceDAOTest {
 
     @Test
     public void testUpdate() {
-        Sentence sentence = SentenceMock.sentences.get(2);
+        Sentence sentence = SentenceMock.dummySentence;
+        sentence = sentenceDAO.create(sentence);
+
         sentence.setLabel("Updated label");
         sentence.setActivated(false);
 

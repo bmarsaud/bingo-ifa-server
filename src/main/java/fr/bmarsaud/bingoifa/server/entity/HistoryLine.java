@@ -10,7 +10,6 @@ public class HistoryLine {
 
     public HistoryLine(int id, Timestamp date, Grid grid, int rank) {
         this.id = id;
-        date.setNanos(0);
         this.date = date;
         this.grid = grid;
         this.rank = rank;
@@ -18,7 +17,6 @@ public class HistoryLine {
 
     public HistoryLine(Timestamp date, Grid grid, int rank) {
         this.id = -1;
-        date.setNanos(0);
         this.date = date;
         this.grid = grid;
         this.rank = rank;
@@ -44,7 +42,6 @@ public class HistoryLine {
     }
 
     public void setDate(Timestamp date) {
-        date.setNanos(0);
         this.date = date;
     }
 

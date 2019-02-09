@@ -1,6 +1,6 @@
 package fr.bmarsaud.bingoifa.server.entity;
 
-import java.lang.reflect.Array;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class User {
@@ -8,21 +8,24 @@ public class User {
     private String login;
     private String password;
     private Grid grid;
+    private Timestamp lastRequest;
     private ArrayList<HistoryLine> history;
 
-    public User(int id, String login, String password, Grid grid, ArrayList<HistoryLine> history) {
+    public User(int id, String login, String password, Grid grid, Timestamp lastRequest, ArrayList<HistoryLine> history) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.grid = grid;
+        this.lastRequest = lastRequest;
         this.history = history;
     }
 
-    public User(String login, String password, Grid grid, ArrayList<HistoryLine> history) {
+    public User(String login, String password, Grid grid, Timestamp lastRequest, ArrayList<HistoryLine> history) {
         this.id = -1;
         this.login = login;
         this.password = password;
         this.grid = grid;
+        this.lastRequest = lastRequest;
         this.history = history;
     }
 
@@ -66,6 +69,14 @@ public class User {
         this.grid = grid;
     }
 
+    public Timestamp getLastRequest() {
+        return lastRequest;
+    }
+
+    public void setLastRequest(Timestamp lastRequest) {
+        this.lastRequest = lastRequest;
+    }
+
     public ArrayList<HistoryLine> getHistory() {
         return history;
     }
@@ -75,7 +86,7 @@ public class User {
     }
 
     public String toString() {
-        return "User{id=" + id + ", login=" + login + ", password=" + password + ", grid=" + grid + ", history=" + history + "}";
+        return "User{id=" + id + ", login=" + login + ", password=" + password + ", grid=" + grid + ", lastRequest=" + lastRequest +", history=" + history + "}";
     }
 
     public boolean equals(Object obj) {

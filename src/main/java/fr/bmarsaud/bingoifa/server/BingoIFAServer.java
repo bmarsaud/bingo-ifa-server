@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.URI;
 
 public class BingoIFAServer {
-    public static final String BASE_URI = "http://localhost:8080/binfo-ifa-server/";
+    public static final String SCHEME = "http://";
+    public static final String HOST = SCHEME + "localhost:8080";
+    public static final String BASE_URI = HOST + "/bingo-ifa-server";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources.
@@ -19,17 +21,11 @@ public class BingoIFAServer {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
-    /**
-     * BingoIFAServer method.
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
-        final HttpServer server = startServer();
-        System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+    public static void main(String[] args) throws IOException { final HttpServer server = startServer();
+        System.out.println("bingo-ifa-server started at " + BASE_URI + " !");
+        System.out.println("Press a key to shutdown...");
         System.in.read();
-        server.stop();
+        server.shutdown();
     }
 }
 

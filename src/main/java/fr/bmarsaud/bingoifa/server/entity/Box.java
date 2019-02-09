@@ -83,6 +83,6 @@ public class Box {
     }
 
     public String toString() {
-        return "Box{id=" + id + ", position=" + position + ", checked=" + checked + ", checkedTime=" + checkedTime + " idSentence=" + sentence.getId() + "}";
+        return "Box{id=" + id + ", position=" + position + ", checked=" + checked + ", checkedTime=" + checkedTime + " sentence=" + sentence + "}";
     }
 }

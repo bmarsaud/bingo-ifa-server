@@ -47,7 +47,6 @@ public class BoxDAOTest {
     public  void testFindNonexistent() {
         Box expectedBox = BoxMock.nonexistentBox;
         assertNull(boxDAO.find(expectedBox.getId()));
-
     }
 
     @Test
@@ -70,6 +69,7 @@ public class BoxDAOTest {
         boolean result = boxDAO.update(box);
         assertTrue(result);
         assertEquals(boxDAO.find(box.getId()), box);
+        boxDAO.delete(box);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class BoxDAOTest {
 
     @Test
     public void testDeleteBox() {
-        Box box = BoxMock.boxes.get(8);
+        Box box = BoxMock.toCreateBox;
         box = boxDAO.createGridBox(box, GridMock.grids.get(1));
 
         boolean result = boxDAO.delete(box);

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import fr.bmarsaud.bingoifa.server.entity.HistoryLine;
@@ -97,7 +98,8 @@ public class HistoryLineDAO implements DAO<HistoryLine> {
             statement = connection.prepareStatement("INSERT INTO HistoryLine(date, rank, idgrid, iduser) VALUES (?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
             statement.setTimestamp(1, historyLine.getDate());
             statement.setInt(2, historyLine.getRank());
-            statement.setInt(3, historyLine.getGrid() != null ? historyLine.getGrid().getId() : -1);
+            if(historyLine.getGrid() != null) statement.setInt(3, historyLine.getGrid().getId());
+            else statement.setNull(3, Types.INTEGER);
             statement.setInt(4, user.getId());
             statement.executeUpdate();
 
@@ -137,7 +139,8 @@ public class HistoryLineDAO implements DAO<HistoryLine> {
             statement = connection.prepareStatement("UPDATE HistoryLine SET date = ?, rank = ?, idGrid = ? WHERE idHistoryLine = ?;");
             statement.setTimestamp(1, historyLine.getDate());
             statement.setInt(2, historyLine.getRank());
-            statement.setInt(3, historyLine.getGrid() != null ? historyLine.getGrid().getId() : -1);
+            if(historyLine.getGrid() != null) statement.setInt(3, historyLine.getGrid().getId());
+            else statement.setNull(3, Types.INTEGER);
             statement.setInt(4, historyLine.getId());
 
             if(statement.executeUpdate() > 0) {
