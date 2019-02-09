@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.bmarsaud.bingoifa.server.BingoIFAServer;
-import fr.bmarsaud.bingoifa.server.auth.HMACManager;
 import fr.bmarsaud.bingoifa.server.entity.User;
 import fr.bmarsaud.bingoifa.server.mock.RequestMock;
 import fr.bmarsaud.bingoifa.server.mock.UserMock;

@@ -10,17 +10,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fr.bmarsaud.bingoifa.server.auth.RequestHandler;
+import fr.bmarsaud.bingoifa.server.entity.User;
 
 @Path("user")
 public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getLoggedUser(@Context Request request) {
-        RequestHandler requestHandler = new RequestHandler(request);
-        if(!requestHandler.requestIsAuthenticated()) {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
+        User user = RequestHandler.getAuthenticatedUser(request);
 
-        return Response.ok(requestHandler.getAuthenticatedUser()).build();
+        return Response.ok(user).build();
     }
 }

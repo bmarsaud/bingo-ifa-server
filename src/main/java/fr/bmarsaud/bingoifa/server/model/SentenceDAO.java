@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-import javax.xml.transform.Result;
-
 import fr.bmarsaud.bingoifa.server.entity.Sentence;
 
 public class SentenceDAO implements DAO<Sentence>{

@@ -2,30 +2,16 @@ package fr.bmarsaud.bingoifa.server.auth;
 
 import org.glassfish.grizzly.http.server.Request;
 
-import java.io.CharConversionException;
 import java.sql.Timestamp;
+
+import javax.ws.rs.NotAuthorizedException;
 
 import fr.bmarsaud.bingoifa.server.BingoIFAServer;
 import fr.bmarsaud.bingoifa.server.entity.User;
 import fr.bmarsaud.bingoifa.server.model.UserDAO;
 
 public class RequestHandler {
-    private UserDAO userDAO;
-    private Request request;
-    private boolean authenticated;
-    private User authenticatedUser;
-
-    public RequestHandler(Request request) {
-        this.request = request;
-
-        userDAO = new UserDAO();
-        authenticated = false;
-        authenticatedUser = null;
-
-        handleRequest();
-    }
-
-    private void handleRequest() {
+    public static User getAuthenticatedUser(Request request)  {
         String requestMethod = request.getMethod().toString();
         String requestUri = BingoIFAServer.HOST + request.getRequestURI();
         String requestUsername = request.getHeader("X-Authorization-Username");
@@ -33,6 +19,7 @@ public class RequestHandler {
         String requestSignature = request.getHeader("X-Authorization-Signature");
 
         if(requestUsername != null && requestTimestamp != null && requestSignature != null) {
+            UserDAO userDAO = new UserDAO();
             User user = userDAO.findFromName(requestUsername);
             String signature = requestMethod + requestUri + requestUsername + requestTimestamp;
 
@@ -41,17 +28,12 @@ public class RequestHandler {
                 user.setLastRequest(timestamp);
                 userDAO.update(user);
 
-                authenticatedUser = user;
-                authenticated = true;
+                return user;
+            } else {
+                throw new NotAuthorizedException("Bad auth signature.");
             }
+        } else {
+            throw new NotAuthorizedException("Auth information missing.");
         }
-    }
-
-    public boolean requestIsAuthenticated() {
-        return authenticated;
-    }
-
-    public User getAuthenticatedUser() {
-        return authenticatedUser;
     }
 }
