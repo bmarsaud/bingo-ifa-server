@@ -79,7 +79,7 @@ public class UserResourceTest {
 
     @Test
     public void testGenerateGridIfNull() {
-        User user = new User("generateGridIfNull", "password", gridController.generateNewGrid(), Timestamp.from(Instant.EPOCH), null);
+        User user = new User("generateGridIfNull", "password", gridController.generateNewGrid(), null, null);
         user = userDAO.create(user);
 
         Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
@@ -90,7 +90,7 @@ public class UserResourceTest {
 
     @Test
     public void testGenerateNewGrid() {
-        User user = new User("generateNewGrid", "password", gridController.generateNewGrid(), Timestamp.from(Instant.EPOCH), null);
+        User user = new User("generateNewGrid", "password", gridController.generateNewGrid(), null, null);
         user.getGrid().setDate(Date.valueOf(LocalDate.EPOCH));
         user = userDAO.create(user);
 

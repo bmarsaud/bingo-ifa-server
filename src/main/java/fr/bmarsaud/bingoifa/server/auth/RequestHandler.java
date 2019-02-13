@@ -24,7 +24,7 @@ public class RequestHandler {
             String signature = requestMethod + requestUri + requestUsername + requestTimestamp;
 
             Timestamp timestamp = Timestamp.valueOf(requestTimestamp);
-            if(user != null && HMACManager.encode(user.getPassword(), signature).equals(requestSignature) && user.getLastRequest() != null && timestamp.after(user.getLastRequest())) {
+            if(user != null && HMACManager.encode(user.getPassword(), signature).equals(requestSignature) && (user.getLastRequest() == null || timestamp.after(user.getLastRequest()))) {
                 user.setLastRequest(timestamp);
                 userDAO.update(user);
 
