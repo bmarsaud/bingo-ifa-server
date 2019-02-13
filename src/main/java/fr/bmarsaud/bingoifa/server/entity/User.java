@@ -1,6 +1,7 @@
 package fr.bmarsaud.bingoifa.server.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User {
@@ -35,6 +36,10 @@ public class User {
         password = null;
         grid = null;
         history = new ArrayList<>();
+    }
+
+    public boolean isGridOutdated() {
+        return grid == null || grid.getDate().toLocalDate().getDayOfYear() < LocalDate.now().getDayOfYear();
     }
 
     public int getId() {

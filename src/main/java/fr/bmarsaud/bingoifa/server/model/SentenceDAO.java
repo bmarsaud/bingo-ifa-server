@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import fr.bmarsaud.bingoifa.server.entity.Sentence;
@@ -148,5 +149,43 @@ public class SentenceDAO implements DAO<Sentence>{
         }
 
         return sentence;
+    }
+
+    public HashMap<Integer, Sentence> findAll() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+
+        sentences.clear();
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.prepareStatement("SELECT * FROM Sentence;");
+
+            result = statement.executeQuery();
+            while(result.next()) {
+                sentences.put(
+                    result.getInt("idSentence"),
+                    new Sentence(
+                        result.getInt("idSentence"),
+                        result.getString("label"),
+                        result.getInt("upVotes"),
+                        result.getInt("downVotes"),
+                        result.getBoolean("activated")
+                    )
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(result != null) result.close();
+                if(statement != null) statement.close();
+                if(connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return sentences;
     }
 }

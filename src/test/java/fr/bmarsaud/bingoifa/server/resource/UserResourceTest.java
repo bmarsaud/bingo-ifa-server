@@ -6,6 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.ws.rs.client.Client;
@@ -15,18 +19,30 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import fr.bmarsaud.bingoifa.server.BingoIFAServer;
+import fr.bmarsaud.bingoifa.server.controller.GridController;
 import fr.bmarsaud.bingoifa.server.entity.Grid;
 import fr.bmarsaud.bingoifa.server.entity.HistoryLine;
 import fr.bmarsaud.bingoifa.server.entity.User;
 import fr.bmarsaud.bingoifa.server.mock.RequestMock;
 import fr.bmarsaud.bingoifa.server.mock.UserMock;
+import fr.bmarsaud.bingoifa.server.model.UserDAO;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 
 public class UserResourceTest {
+    private UserDAO userDAO;
+    private GridController gridController;
+
     private HttpServer server;
     private WebTarget target;
+
+
+    public UserResourceTest() {
+        userDAO = new UserDAO();
+        gridController = new GridController();
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -54,10 +70,33 @@ public class UserResourceTest {
     @Test
     public void testCurrentGrid() {
         User user = UserMock.users.get(0);
-        Grid expectedGrid = user.getGrid();
+        Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
+        user = userDAO.find(user.getId());
+
+        assertEquals(200, response.getStatus());
+        assertEquals(user.getGrid(), response.readEntity(Grid.class));
+    }
+
+    @Test
+    public void testGenerateGridIfNull() {
+        User user = new User("generateGridIfNull", "password", gridController.generateNewGrid(), Timestamp.from(Instant.EPOCH), null);
+        user = userDAO.create(user);
 
         Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
+
         assertEquals(200, response.getStatus());
-        assertEquals(expectedGrid, response.readEntity(Grid.class));
+        assertNotNull(response.readEntity(Grid.class));
+    }
+
+    @Test
+    public void testGenerateNewGrid() {
+        User user = new User("generateNewGrid", "password", gridController.generateNewGrid(), Timestamp.from(Instant.EPOCH), null);
+        user.getGrid().setDate(Date.valueOf(LocalDate.EPOCH));
+        user = userDAO.create(user);
+
+        Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
+
+        assertEquals(200, response.getStatus());
+        assertNotEquals(user.getGrid(), response.readEntity(Grid.class));
     }
 }
