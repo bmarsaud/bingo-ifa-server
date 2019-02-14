@@ -13,7 +13,7 @@ public class GridDAO implements DAO<Grid>{
     private BoxDAO boxDAO;
 
     public GridDAO() {
-        boxDAO = new BoxDAO();
+        boxDAO = DAOFactory.getBoxDAO();
     }
 
     public Grid create(Grid grid) {

@@ -14,8 +14,8 @@ public class UserDAO implements DAO<User> {
     private HistoryLineDAO historyLineDAO;
 
     public UserDAO() {
-        gridDAO = new GridDAO();
-        historyLineDAO = new HistoryLineDAO();
+        gridDAO = DAOFactory.getGridDAO();
+        historyLineDAO = DAOFactory.getHistoryLineDAO();
     }
 
     public User create(User user) {

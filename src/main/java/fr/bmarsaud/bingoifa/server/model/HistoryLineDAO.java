@@ -15,7 +15,7 @@ public class HistoryLineDAO implements DAO<HistoryLine> {
     private GridDAO gridDAO;
 
     public HistoryLineDAO() {
-        gridDAO = new GridDAO();
+        gridDAO = DAOFactory.getGridDAO();
     }
 
     @Override

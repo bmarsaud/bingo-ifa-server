@@ -14,7 +14,7 @@ public class BoxDAO implements DAO<Box> {
     private SentenceDAO sentenceDAO;
 
     public BoxDAO() {
-        sentenceDAO = new SentenceDAO();
+        sentenceDAO = DAOFactory.getSentenceDAO();
     }
 
     public Box create(Box box) {

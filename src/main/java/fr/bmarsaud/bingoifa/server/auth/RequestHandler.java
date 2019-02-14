@@ -8,6 +8,7 @@ import javax.ws.rs.NotAuthorizedException;
 
 import fr.bmarsaud.bingoifa.server.BingoIFAServer;
 import fr.bmarsaud.bingoifa.server.entity.User;
+import fr.bmarsaud.bingoifa.server.model.DAOFactory;
 import fr.bmarsaud.bingoifa.server.model.UserDAO;
 
 public class RequestHandler {
@@ -19,7 +20,7 @@ public class RequestHandler {
         String requestSignature = request.getHeader("X-Authorization-Signature");
 
         if(requestUsername != null && requestTimestamp != null && requestSignature != null) {
-            UserDAO userDAO = new UserDAO();
+            UserDAO userDAO = DAOFactory.getUserDAO();
             User user = userDAO.findFromName(requestUsername);
             String signature = requestMethod + requestUri + requestUsername + requestTimestamp;
 

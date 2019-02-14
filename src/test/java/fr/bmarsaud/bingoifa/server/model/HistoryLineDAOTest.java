@@ -20,8 +20,8 @@ public class HistoryLineDAOTest {
     private UserDAO userDAO;
 
     public HistoryLineDAOTest() {
-        historyLineDAO = new HistoryLineDAO();
-        userDAO = new UserDAO();
+        historyLineDAO = DAOFactory.getHistoryLineDAO();
+        userDAO = DAOFactory.getUserDAO();
     }
 
     @Test

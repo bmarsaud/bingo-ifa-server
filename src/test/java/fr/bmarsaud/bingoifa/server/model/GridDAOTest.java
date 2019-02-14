@@ -21,7 +21,7 @@ public class GridDAOTest {
 
     @Before
     public void setup() {
-        gridDAO = new GridDAO();
+        gridDAO = DAOFactory.getGridDAO();
     }
 
     @Test

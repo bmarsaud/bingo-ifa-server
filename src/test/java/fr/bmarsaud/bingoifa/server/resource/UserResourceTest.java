@@ -7,8 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -19,12 +17,14 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import fr.bmarsaud.bingoifa.server.BingoIFAServer;
+import fr.bmarsaud.bingoifa.server.controller.ControllerFactory;
 import fr.bmarsaud.bingoifa.server.controller.GridController;
 import fr.bmarsaud.bingoifa.server.entity.Grid;
 import fr.bmarsaud.bingoifa.server.entity.HistoryLine;
 import fr.bmarsaud.bingoifa.server.entity.User;
 import fr.bmarsaud.bingoifa.server.mock.RequestMock;
 import fr.bmarsaud.bingoifa.server.mock.UserMock;
+import fr.bmarsaud.bingoifa.server.model.DAOFactory;
 import fr.bmarsaud.bingoifa.server.model.UserDAO;
 
 import static junit.framework.Assert.assertEquals;
@@ -40,8 +40,8 @@ public class UserResourceTest {
 
 
     public UserResourceTest() {
-        userDAO = new UserDAO();
-        gridController = new GridController();
+        userDAO = DAOFactory.getUserDAO();
+        gridController = ControllerFactory.getGridController();
     }
 
     @Before

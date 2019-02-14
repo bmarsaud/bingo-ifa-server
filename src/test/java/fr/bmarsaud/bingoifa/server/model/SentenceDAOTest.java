@@ -16,7 +16,7 @@ public class SentenceDAOTest {
 
     @Before
     public void setup() {
-        sentenceDAO = new SentenceDAO();
+        sentenceDAO = DAOFactory.getSentenceDAO();
     }
 
     @Test

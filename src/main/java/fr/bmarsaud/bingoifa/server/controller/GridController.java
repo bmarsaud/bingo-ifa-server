@@ -8,6 +8,7 @@ import java.util.Random;
 import fr.bmarsaud.bingoifa.server.entity.Box;
 import fr.bmarsaud.bingoifa.server.entity.Grid;
 import fr.bmarsaud.bingoifa.server.entity.Sentence;
+import fr.bmarsaud.bingoifa.server.model.DAOFactory;
 import fr.bmarsaud.bingoifa.server.model.GridDAO;
 import fr.bmarsaud.bingoifa.server.model.SentenceDAO;
 
@@ -16,8 +17,8 @@ public class GridController {
     private GridDAO gridDAO;
 
     public GridController() {
-        sentenceDAO = new SentenceDAO();
-        gridDAO = new GridDAO();
+        sentenceDAO = DAOFactory.getSentenceDAO();
+        gridDAO = DAOFactory.getGridDAO();
     }
 
     public Grid generateNewGrid() {

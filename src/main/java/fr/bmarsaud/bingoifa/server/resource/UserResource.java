@@ -11,9 +11,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fr.bmarsaud.bingoifa.server.auth.RequestHandler;
+import fr.bmarsaud.bingoifa.server.controller.ControllerFactory;
 import fr.bmarsaud.bingoifa.server.controller.GridController;
 import fr.bmarsaud.bingoifa.server.entity.Grid;
 import fr.bmarsaud.bingoifa.server.entity.User;
+import fr.bmarsaud.bingoifa.server.model.DAOFactory;
 import fr.bmarsaud.bingoifa.server.model.UserDAO;
 
 @Path("user")
@@ -23,8 +25,8 @@ public class UserResource {
     private UserDAO userDAO;
 
     public UserResource() {
-        gridController = new GridController();
-        userDAO = new UserDAO();
+        gridController = ControllerFactory.getGridController();
+        userDAO = DAOFactory.getUserDAO();
     }
 
     @GET

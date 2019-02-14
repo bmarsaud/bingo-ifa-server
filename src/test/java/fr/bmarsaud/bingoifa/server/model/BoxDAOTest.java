@@ -22,7 +22,7 @@ public class BoxDAOTest {
 
     @Before
     public void setup() {
-        boxDAO = new BoxDAO();
+        boxDAO = DAOFactory.getBoxDAO();
     }
 
     @Test
