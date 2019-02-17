@@ -17,23 +17,23 @@ Running tests : `mvn clean test`
 * `grid`
     * `grid/{gridId}` : get grid by id
     * `grid/shuffle/{gridId}` : shuffle one box of the grid
-    * `grid/check/{boxPosition}` check the box at a position
+    * `grid/{gridId}/check/{boxPosition}` check the box at a position
 * `user`
-    * `user/{userId}` : get user by id
+    * `user` : get authenticated user
+    * `history` : get authenticated users' history
+    * `grid` : get authenticated users' current grid
 * `sentence`
     * `sentence/{sentenceId}` : get sentence by id
     * `sentence/upvote/{sentenceId}` : upvote a sentence
     * `sentence/downvote/{sentenceId}` : downvote a sentence
 * `history`
     * `history` : get all history
-    * `history/byUser/{userId}` : get a user's hostory
 
 ## Dependencies
 * [Jersey](https://jersey.github.io/) - Framework for developing RESTful web services with JAX-RS support
 * [Grizzly2](https://javaee.github.io/grizzly/) - Highly scalable web server for J2EE applications
 * [HikariCP](https://brettwooldridge.github.io/HikariCP/) - JDBC connection pool
 * [MariaDB Connector/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/) - MariaDB JDBC connector
-* [jersey-hmac-auth](https://github.com/bazaarvoice/jersey-hmac-auth) - HMAC auth implementation for Jersey
 * [JUnit](https://junit.org/junit5/) - Test framework for java
 * [Jacoco](https://www.jacoco.org/jacoco/) - Code coverage library for Java
 
