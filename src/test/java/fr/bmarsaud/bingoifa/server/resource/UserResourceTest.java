@@ -69,18 +69,17 @@ public class UserResourceTest {
 
     @Test
     public void testCurrentGrid() {
-        User user = UserMock.toCreateUser;
+        User user = new User("getCurrentGrid", "password", gridController.generateNewGrid(), null, null);
         user = userDAO.create(user);
-        Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
-        user = userDAO.find(user.getId());
 
+        Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
         assertEquals(200, response.getStatus());
         assertEquals(user.getGrid(), response.readEntity(Grid.class));
     }
 
     @Test
     public void testGenerateGridIfNull() {
-        User user = new User("generateGridIfNull", "password", gridController.generateNewGrid(), null, null);
+        User user = new User("generateGridIfNull", "password", null, null, null);
         user = userDAO.create(user);
 
         Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
@@ -90,7 +89,7 @@ public class UserResourceTest {
     }
 
     @Test
-    public void testGenerateNewGrid() {
+    public void testGenerateNewGridIfOutdated() {
         User user = new User("generateNewGrid", "password", gridController.generateNewGrid(), null, null);
         user.getGrid().setDate(Date.valueOf(LocalDate.EPOCH));
         user = userDAO.create(user);
