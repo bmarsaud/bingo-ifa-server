@@ -69,7 +69,8 @@ public class UserResourceTest {
 
     @Test
     public void testCurrentGrid() {
-        User user = UserMock.users.get(0);
+        User user = UserMock.toCreateUser;
+        user = userDAO.create(user);
         Response response = RequestMock.buildAuthRequest(target.path("user/grid"), Method.GET, user).get();
         user = userDAO.find(user.getId());
 
