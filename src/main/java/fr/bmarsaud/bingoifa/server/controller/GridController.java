@@ -43,4 +43,18 @@ public class GridController {
 
        return grid;
     }
+
+    public void shuffleGrid(Grid grid, int boxPosition) {
+        Random random = new Random();
+
+        ArrayList<Sentence> sentences = new ArrayList<>(sentenceDAO.findAll().values());
+        sentences.remove(grid.getBoxes().get(boxPosition).getSentence());
+
+        Sentence newSentence = sentences.get(random.nextInt(sentences.size()));
+
+        grid.getBoxes().get(boxPosition).setSentence(newSentence);
+        grid.setShuffled(true);
+
+        gridDAO.update(grid);
+    }
 }

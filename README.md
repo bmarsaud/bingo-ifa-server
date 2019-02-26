@@ -16,12 +16,12 @@ Running tests : `mvn clean test`
 ## Entry points
 * `grid`
     * `grid/{gridId}` : get grid by id
-    * `grid/shuffle/{gridId}` : shuffle one box of the grid
+    * `grid/{gridId}/shuffle/{boxPosition}` : shuffle one box of the grid
     * `grid/{gridId}/check/{boxPosition}` check the box at a position
 * `user`
     * `user` : get authenticated user
-    * `history` : get authenticated users' history
-    * `grid` : get authenticated users' current grid
+    * `user/history` : get authenticated users' history
+    * `user/grid` : get authenticated users' current grid
 * `sentence`
     * `sentence/{sentenceId}` : get sentence by id
     * `sentence/upvote/{sentenceId}` : upvote a sentence

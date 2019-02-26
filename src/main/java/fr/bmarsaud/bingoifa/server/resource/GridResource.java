@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fr.bmarsaud.bingoifa.server.auth.RequestHandler;
+import fr.bmarsaud.bingoifa.server.controller.ControllerFactory;
+import fr.bmarsaud.bingoifa.server.controller.GridController;
 import fr.bmarsaud.bingoifa.server.entity.Box;
 import fr.bmarsaud.bingoifa.server.entity.Grid;
 import fr.bmarsaud.bingoifa.server.entity.User;
@@ -29,10 +31,12 @@ import fr.bmarsaud.bingoifa.server.model.GridDAO;
 public class GridResource {
     private GridDAO gridDAO;
     private BoxDAO boxDAO;
+    private GridController gridController;
 
     public GridResource() {
         gridDAO = DAOFactory.getGridDAO();
         boxDAO = DAOFactory.getBoxDAO();
+        gridController = ControllerFactory.getGridController();
     }
 
     @GET
@@ -47,7 +51,7 @@ public class GridResource {
     public Response checkGridBox(@Context Request request, @PathParam("gridId") int gridId, @PathParam("boxPosition") int boxPosition) {
         User user = RequestHandler.getAuthenticatedUser(request);
 
-        if(user.getGrid().getId() != gridId) throw new NotAuthorizedException("Your not authorized to modify this grid.");
+        if(user.getGrid().getId() != gridId) throw new NotAuthorizedException("You are not authorized to modify this grid.");
         if(boxPosition < 0 || boxPosition > 15) throw new BadRequestException("Box position must be in [0-15] range.");
         if(user.getGrid().getBoxes().get(boxPosition).isChecked()) return Response.status(Response.Status.NOT_MODIFIED).build();
 
@@ -55,6 +59,19 @@ public class GridResource {
         box.setChecked(true);
         box.setCheckedTime(Time.valueOf(LocalTime.now()));
         boxDAO.update(box);
+
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{gridId}/shuffle/{boxPosition}")
+    public Response shuffleGrid(@Context Request request, @PathParam("gridId") int gridId, @PathParam("boxPosition") int boxPosition) {
+        User user = RequestHandler.getAuthenticatedUser(request);
+
+        if(user.getGrid().getId() != gridId) throw new NotAuthorizedException("You are not authorized to modify this grid.");
+        if(user.getGrid().isShuffled()) return Response.notModified().build();
+
+        gridController.shuffleGrid(user.getGrid(), boxPosition);
 
         return Response.ok().build();
     }

@@ -29,6 +29,7 @@ import fr.bmarsaud.bingoifa.server.model.UserDAO;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 public class GridResourceTest {
     private User user;
@@ -111,5 +112,39 @@ public class GridResourceTest {
 
         response = RequestMock.buildAuthRequest(target.path("grid/" + user.getGrid().getId() + "/check/-18"), Method.POST, user).post(null);
         assertEquals(400, response.getStatus());
+    }
+
+    @Test
+    public void testGridShuffle() {
+        User user = new User("testGridShuffle", "password", gridController.generateNewGrid(), null, null);
+        user = userDAO.create(user);
+        Box oldBox = user.getGrid().getBoxes().get(0);
+
+        Response response = RequestMock.buildAuthRequest(target.path("grid/" + user.getGrid().getId() + "/shuffle/0"), Method.POST, user).post(null);
+        user = userDAO.find(user.getId());
+
+        assertEquals(200, response.getStatus());
+        assertTrue(user.getGrid().isShuffled());
+        assertNotEquals(user.getGrid().getBoxes().get(0), oldBox);
+    }
+
+    @Test
+    public void testAlreadyShuffled() {
+        User user = new User("testAlreadyShu", "password", gridController.generateNewGrid(), null, null);
+        user = userDAO.create(user);
+
+        gridController.shuffleGrid(user.getGrid(), 0);
+
+        Response response = RequestMock.buildAuthRequest(target.path("grid/" + user.getGrid().getId() + "/shuffle/10"), Method.POST, user).post(null);
+        assertEquals(304, response.getStatus());
+    }
+
+    @Test
+    public void testUnauthorizedGridShuffle() {
+        User user = new User("tugs", "password", gridController.generateNewGrid(), null, null);
+        user = userDAO.create(user);
+
+        Response response = RequestMock.buildAuthRequest(target.path("grid/0/shuffle/0"), Method.POST, user).post(null);
+        assertEquals(401, response.getStatus());
     }
 }
