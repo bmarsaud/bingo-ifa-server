@@ -6,15 +6,14 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
 import java.net.URI;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 import fr.bmarsaud.bingoifa.server.config.ConfigManager;
 
 public class BingoIFAServer {
-    public static final String SCHEME = "http://";
-    public static final String HOST = SCHEME + "localhost:8080";
-    public static final String BASE_URI = HOST + "/bingo-ifa-server";
+    public static String SCHEME;
+    public static String HOST;
+    public static String BASE_URI;
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources.
@@ -25,7 +24,23 @@ public class BingoIFAServer {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
+    /**
+     * Load host configuration
+     */
+    public static void loadConfiguration() {
+        Properties properties = new ConfigManager().getProperties("host");
+        SCHEME = properties.getProperty("host.scheme");
+        HOST = properties.getProperty("host.name") + ":" + properties.getProperty("host.port", "80");
+        BASE_URI = SCHEME + "://" + HOST + "/" + properties.getProperty("host.baseUri");
+
+        System.out.println(SCHEME);
+        System.out.println(HOST);
+        System.out.println(BASE_URI);
+    }
+
     public static void main(String[] args) throws IOException {
+        BingoIFAServer.loadConfiguration();
+
         final HttpServer server = startServer();
         System.out.println("bingo-ifa-server started at " + BASE_URI + " !");
         System.out.println("Press a key to shutdown...");

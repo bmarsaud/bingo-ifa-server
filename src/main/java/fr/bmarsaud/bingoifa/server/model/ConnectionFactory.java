@@ -3,14 +3,9 @@ package fr.bmarsaud.bingoifa.server.model;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
-import fr.bmarsaud.bingoifa.server.BingoIFAServer;
 import fr.bmarsaud.bingoifa.server.config.ConfigManager;
 
 public class ConnectionFactory {
