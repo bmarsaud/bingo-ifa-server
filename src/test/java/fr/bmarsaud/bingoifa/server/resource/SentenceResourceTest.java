@@ -33,6 +33,7 @@ public class SentenceResourceTest {
 
     @Before
     public void setUp() throws Exception {
+        BingoIFAServer.loadConfiguration();
         server = BingoIFAServer.startServer();
 
         Client c = ClientBuilder.newClient();

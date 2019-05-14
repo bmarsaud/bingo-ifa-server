@@ -30,12 +30,8 @@ public class BingoIFAServer {
     public static void loadConfiguration() {
         Properties properties = new ConfigManager().getProperties("host");
         SCHEME = properties.getProperty("host.scheme");
-        HOST = properties.getProperty("host.name") + ":" + properties.getProperty("host.port", "80");
-        BASE_URI = SCHEME + "://" + HOST + "/" + properties.getProperty("host.baseUri");
-
-        System.out.println(SCHEME);
-        System.out.println(HOST);
-        System.out.println(BASE_URI);
+        HOST = SCHEME + "://" + properties.getProperty("host.name") + ":" + properties.getProperty("host.port", "80");
+        BASE_URI = HOST + "/" + properties.getProperty("host.baseUri");
     }
 
     public static void main(String[] args) throws IOException {
