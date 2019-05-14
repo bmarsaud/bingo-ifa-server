@@ -6,9 +6,11 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
 import java.net.URI;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import fr.bmarsaud.bingoifa.server.config.ConfigManager;
+import fr.bmarsaud.bingoifa.server.model.ConnectionFactory;
 
 public class BingoIFAServer {
     public static String SCHEME;
@@ -34,14 +36,23 @@ public class BingoIFAServer {
         BASE_URI = HOST + "/" + properties.getProperty("host.baseUri");
     }
 
+    /**
+     * Test database connection
+     */
+    public static void testDatabaseConnection() {
+        try {
+            ConnectionFactory.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         BingoIFAServer.loadConfiguration();
+        BingoIFAServer.testDatabaseConnection();
+        BingoIFAServer.startServer();
 
-        final HttpServer server = startServer();
         System.out.println("bingo-ifa-server started at " + BASE_URI + " !");
-        System.out.println("Press a key to shutdown...");
-        System.in.read();
-        server.shutdown();
     }
 }
 
