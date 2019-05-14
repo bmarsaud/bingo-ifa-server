@@ -3,31 +3,25 @@ package fr.bmarsaud.bingoifa.server.model;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import fr.bmarsaud.bingoifa.server.BingoIFAServer;
+import fr.bmarsaud.bingoifa.server.config.ConfigManager;
 
 public class ConnectionFactory {
+    private static ConfigManager configManager = new ConfigManager();
     private static HikariDataSource dataSource;
 
     /**
      * Create connection to the database and prepare connection pool
      */
     private static void createConnection() {
-        Properties properties = new Properties();
-        String propertiesFileName = "/database.properties";
-        if(BingoIFAServer.class.getResource(propertiesFileName) == null) propertiesFileName = "/default-database.properties";
-
-        try {
-            properties.load(BingoIFAServer.class.getResourceAsStream(propertiesFileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        HikariConfig config = new HikariConfig(properties);
+        HikariConfig config = new HikariConfig(configManager.getProperties("database"));
         dataSource = new HikariDataSource(config);
     }
 

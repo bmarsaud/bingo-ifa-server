@@ -6,6 +6,10 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Paths;
+import java.util.Properties;
+
+import fr.bmarsaud.bingoifa.server.config.ConfigManager;
 
 public class BingoIFAServer {
     public static final String SCHEME = "http://";
@@ -21,7 +25,8 @@ public class BingoIFAServer {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
-    public static void main(String[] args) throws IOException { final HttpServer server = startServer();
+    public static void main(String[] args) throws IOException {
+        final HttpServer server = startServer();
         System.out.println("bingo-ifa-server started at " + BASE_URI + " !");
         System.out.println("Press a key to shutdown...");
         System.in.read();
