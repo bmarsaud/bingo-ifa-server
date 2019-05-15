@@ -1,0 +1,35 @@
+version: '3'
+services:
+  server:
+    depends_on:
+      - data
+    image: "registry.mouseover.fr:5000/bm/bingo-ifa/server:latest"
+    environment:
+      LETSENCRYPT_HOST: bingo-ifa-server.mouseover.fr
+      LETSENCRYPT_EMAIL: pro@bastien-marsaud.fr
+      VIRTUAL_HOST: bingo-ifa-server.mouseover.fr
+    ports:
+      - 80
+    networks:
+      network:
+        aliases:
+          - server
+
+  data:
+    image: "registry.mouseover.fr:5000/bm/bingo-ifa/test-data:latest"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - bingo-ifa-database:/var/lib/mysql
+    networks:
+      network:
+        aliases:
+          - ${DB_HOST}
+
+networks:
+  network:
