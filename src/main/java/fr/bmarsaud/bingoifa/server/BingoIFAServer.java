@@ -22,7 +22,7 @@ public class BingoIFAServer {
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer() {
-        final ResourceConfig rc = new ResourceConfig().packages("fr.bmarsaud.bingoifa.server.resource");
+        final ResourceConfig rc = new ResourceConfig().packages("fr.bmarsaud.bingoifa.server.resource", "fr.bmarsaud.bingoifa.server.provider");
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
