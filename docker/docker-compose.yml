@@ -33,3 +33,6 @@ services:
 
 networks:
   network:
+
+volumes:
+  bingo-ifa-database:
