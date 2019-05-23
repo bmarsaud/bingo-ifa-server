@@ -12,6 +12,7 @@ CONF_HOST_SCHEME=https
 CONF_HOST_NAME=0.0.0.0
 CONF_HOST_PORT=80
 CONF_HOST_BASE_URI=
+CONF_HOST_PUBLIC_URI=https://bingo-ifa-server.mouseover.fr
 CONF_DB_HOST=data
 CONF_DB_PORT=3306
 CONF_DB_USER=bingo-ifa
@@ -27,6 +28,7 @@ CONF_DB_NAME=bingo-ifa
 [[ -z $HOST_NAME ]] && HOST_NAME=$CONF_HOST_NAME
 [[ -z $HOST_PORT ]] && HOST_PORT=$CONF_HOST_PORT
 [[ -z $HOST_BASE_URI ]] && HOST_BASE_URI=$CONF_HOST_BASE_URI
+[[ -z $HOST_PUBLIC_URI ]] && HOST_PUBLIC_URI=$CONF_HOST_PUBLIC_URI
 [[ -z $DB_HOST ]] && DB_HOST=$CONF_DB_HOST
 [[ -z $DB_PORT ]] && DB_PORT=$CONF_DB_PORT
 [[ -z $DB_USER ]] && DB_USER=$CONF_DB_USER
@@ -44,6 +46,7 @@ echo "HOST_SCHEME=$HOST_SCHEME"
 echo "HOST_NAME=$HOST_NAME"
 echo "HOST_PORT=$HOST_PORT"
 echo "HOST_BASE_URI=$HOST_BASE_URI"
+echo "HOST_PUBLIC_URI=$HOST_PUBLIC_URI"
 echo "-> Database"
 echo "DB_HOST=$DB_HOST"
 echo "DB_PORT=$DB_PORT"
@@ -62,14 +65,15 @@ echo "Done."
 echo "===> Generate configuration"
 mkdir -p config
 
-cat <<EOT >> config/host.properties
+cat <<EOT > config/host.properties
 host.scheme=$HOST_SCHEME
 host.name=$HOST_NAME
 host.port:$HOST_PORT
 host.baseUri=$HOST_BASE_URI
+host.publicUri=$HOST_PUBLIC_URI
 EOT
 
-cat <<EOT >> config/database.properties
+cat <<EOT > config/database.properties
 dataSourceClassName=org.mariadb.jdbc.MariaDbDataSource
 dataSource.user=$DB_USER
 dataSource.password=$DB_PASSWORD

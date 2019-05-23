@@ -14,7 +14,7 @@ import fr.bmarsaud.bingoifa.server.model.UserDAO;
 public class RequestHandler {
     public static User getAuthenticatedUser(Request request)  {
         String requestMethod = request.getMethod().toString();
-        String requestUri = BingoIFAServer.HOST + request.getRequestURI();
+        String requestUri = BingoIFAServer.PUBLIC_URI + request.getRequestURI();
         String requestUsername = request.getHeader("X-Authorization-Username");
         String requestTimestamp = request.getHeader("X-Authorization-Timestamp");
         String requestSignature = request.getHeader("X-Authorization-Signature");

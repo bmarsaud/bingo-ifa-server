@@ -13,9 +13,8 @@ import fr.bmarsaud.bingoifa.server.config.ConfigManager;
 import fr.bmarsaud.bingoifa.server.model.ConnectionFactory;
 
 public class BingoIFAServer {
-    public static String SCHEME;
-    public static String HOST;
     public static String BASE_URI;
+    public static String PUBLIC_URI;
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources.
@@ -31,9 +30,10 @@ public class BingoIFAServer {
      */
     public static void loadConfiguration() {
         Properties properties = new ConfigManager().getProperties("host");
-        SCHEME = properties.getProperty("host.scheme");
-        HOST = SCHEME + "://" + properties.getProperty("host.name") + ":" + properties.getProperty("host.port", "80");
-        BASE_URI = HOST + "/" + properties.getProperty("host.baseUri");
+        String scheme = properties.getProperty("host.scheme");
+        String host = scheme + "://" + properties.getProperty("host.name") + ":" + properties.getProperty("host.port", "80");
+        BASE_URI = host + "/" + properties.getProperty("host.baseUri");
+        PUBLIC_URI = properties.getProperty("host.publicUri", host);
     }
 
     /**
