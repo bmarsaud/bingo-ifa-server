@@ -40,6 +40,18 @@ docker run -d --name $CONTAINER_NAME \
         $IMAGE
 echo "Done."
 
+echo "Writing config file..."
+mkdir -p target/config
+cat <<EOT > target/config/database.properties
+dataSourceClassName=org.mariadb.jdbc.MariaDbDataSource
+dataSource.user=$DB_USER
+dataSource.password=$DB_PASSWORD
+dataSource.databaseName=$DB_NAME
+dataSource.portNumber=$DB_PORT
+dataSource.serverName=$DB_HOST
+EOT
+echo "Done."
+
 echo "=> Waiting database..."
 until mysql --host=$DB_HOST --port=$DB_PORT --user=$DB_USER --password=$DB_PASSWORD --execute "" $DB_DATABASE 2> /dev/null; do
     sleep 1
