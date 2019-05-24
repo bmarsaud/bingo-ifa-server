@@ -42,7 +42,8 @@ public class CorsFilterProvider implements ContainerRequestFilter, ContainerResp
         if (isPreflightRequest(request)) {
             response.getHeaders().add("Access-Control-Allow-Credentials", "true");
             response.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-            response.getHeaders().add("Access-Control-Allow-Headers", "X-Authorization-Username, X-Authorization-Timestamp, X-Authorization-Signature");
+            response.getHeaders().add("Access-Control-Allow-Headers", "X-Authorization-Username, X-Authorization-Timestamp, " +
+                    "X-Authorization-Signature, Content-Type");
         }
 
         response.getHeaders().add("Access-Control-Allow-Origin", "*");
